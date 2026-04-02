@@ -13,6 +13,9 @@ class QuantumSecureGateway {
     this.formUI = document.getElementById("form-ui");
     this.statusText = document.getElementById("status-text");
     this.jokeAudio = document.getElementById("joke-audio");
+    this.alertOverlay = document.getElementById("custom-alert");
+    this.alertMessage = document.getElementById("alert-message");
+    this.alertClose = document.getElementById("alert-close");
 
     this.phase = 1;
     this.sabotageInterval = null;
@@ -31,6 +34,7 @@ class QuantumSecureGateway {
     this.stabilizeBtn.addEventListener("click", () => this.stabilizeSystem());
     this.stopShitBtn.addEventListener("click", () => this.stopSabotage());
     this.loginBtn.addEventListener("click", () => this.handleLogin());
+    this.alertClose.addEventListener("click", () => this.closeAlert());
 
     this.emailInp.addEventListener("focus", () => this.handleEmailFocus());
     this.passInp.addEventListener("focus", () => this.handlePasswordFocus());
@@ -111,14 +115,27 @@ class QuantumSecureGateway {
     this.loginBtn.textContent = "FINALLY LOGIN";
   }
 
+  showAlert(message) {
+    this.alertMessage.textContent = message;
+    this.alertOverlay.style.display = "flex";
+  }
+
+  closeAlert() {
+    this.alertOverlay.style.display = "none";
+  }
+
   handleLogin() {
     if (this.phase < 3) {
-      alert("⚠️ Please stabilize the system first!");
+      this.showAlert("⚠️ Please stabilize the system first!");
       return;
     }
 
-    if (!this.emailInp.value || !this.usernameInp.value || !this.passInp.value) {
-      alert("❌ Access Denied: All quantum fields are required!");
+    if (
+      !this.emailInp.value ||
+      !this.usernameInp.value ||
+      !this.passInp.value
+    ) {
+      this.showAlert("❌ Access Denied: All quantum fields are required!");
       return;
     }
 

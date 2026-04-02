@@ -1,0 +1,170 @@
+# Quantum Secure Gateway - April Fools 2026
+## LLM Context Document
+
+### Project Overview
+The Quantum Secure Gateway is an intentionally dysfunctional login interface created as an April Fools Day joke/challenge entry. It's a creative exploration of anti-UX principles where the primary purpose (allowing users to login) is actively prevented through clever JavaScript, CSS animations, and UI trickery.
+
+### Core Concept
+Rather than following UX best practices, this project deliberately violates them in entertaining ways:
+- Input fields that run away from the cursor
+- Parasitic text deletion when focusing different fields
+- Disabled but misleadingly styled inputs
+- Custom alert overlays for validation messages
+- Humorous fake authentication messages
+- Progressive reveals through multiple "phases"
+
+### Technical Architecture
+
+#### Files Structure
+- **index.html**: Contains semantic HTML with custom alert overlay structure
+- **script.js**: QuantumSecureGateway class managing all functionality
+- **style.css**: Responsive styling with animations and media queries
+- **README.md**: Project documentation
+- **llms.txt**: This context file
+- **login.mp3**: Audio file (optional) for final reveal
+
+#### JavaScript (script.js)
+The QuantumSecureGateway class is the core controller:
+
+**Constructor & Initialization**:
+- `constructor()`: Initializes references to DOM elements
+- `init()`: Sets up event listeners and phase transitions
+- Phase tracking: 1 (evasion), 2 (sabotage), 3 (stable)
+
+**Event Handling**:
+- `handleMouseMove()`: Makes inputs teleport when cursor approaches
+- `handleEmailFocus()`, `handlePasswordFocus()`, `handleUsernameFocus()`: Trigger parasitic deletion
+- `setupEventListeners()`: Binds all events for buttons and inputs
+
+**Core Functions**:
+- `stabilizeSystem()`: Transitions from Phase 1 to Phase 2 (evasion to sabotage)
+- `startDeleting()`: Begins auto-deletion of other fields' text
+- `stopSabotage()`: Transitions to Phase 3 (enables normal input)
+- `handleLogin()`: Validates inputs and starts the auth sequence
+- `runLoginSequence()`: Displays humorous fake verification messages
+- `revealPunchline()`: Shows the final April Fools message with audio
+- `showAlert()`: Displays custom alert modal
+- `closeAlert()`: Hides custom alert modal
+
+**Custom Alert System**:
+- Replaces native browser `alert()` with DOM-based modal
+- Features smooth slide-in animation
+- Responsive design that works on mobile devices
+
+#### CSS (style.css)
+**Design System**:
+- Color variables: Primary blue (#0066ff), neon cyan (#00d9ff), neon magenta (#ff006e), neon purple (#b537f2)
+- Typography: Orbitron (display), Exo (body)
+- Backdrop filters and glassmorphism effects
+
+**Key Classes**:
+- `.login-card`: Main container with pulsing border animation
+- `.shy-wrapper`: Input wrapper that transforms on cursor approach
+- `.premium-input`: Styled input fields with focus states
+- `.alert-overlay`: Fixed-position modal backdrop
+- `.alert-content`: Modal content box with animation
+- `.premium-btn`: Primary buttons with gradient and shimmer effects
+- `.helper-btn`: Secondary buttons for phase transitions
+
+**Animations**:
+- `cardPulse`: Border and shadow pulse for login card
+- `gradientShift`: Animated gradient text for brand name
+- `float1`, `float2`: Floating orb backgrounds
+- `flareMovement`: Animated light flare effect
+- `slideIn`: Smooth modal entrance animation
+
+**Responsive Breakpoints**:
+- 768px: Tablet adjustments
+- 600px: Medium mobile adjustments
+- 480px: Small mobile adjustments with optimized alert sizing
+
+#### HTML (index.html)
+**Key Elements**:
+- Custom alert overlay with centered modal
+- Three input field wrappers (username, email, password)
+- Stabilize System button (initially hidden)
+- Stop This button (initially hidden)
+- Login button
+- Status box for authentication sequence
+- Audio element for joke sound
+
+### User Flow
+
+1. **Page Load (Phase 1)**: After 4 seconds, "Stabilize System" button appears
+2. **Evasion Phase**: Inputs flee from cursor (distance < 200px triggers movement)
+3. **Stabilization Click**: Transitions to Phase 2, shows fields normally but enables parasitic deletion
+4. **Sabotage Phase**: Focusing any field auto-deletes text in other fields
+5. **Stop Sabotage Click**: Transitions to Phase 3, enables normal input
+6. **Login Click**: Validates all fields filled, shows fake auth messages
+7. **Sequence Complete**: Reveals punchline with "🤡 APRIL FOOLS!" message
+
+### Key Technical Details
+
+**Cursor Detection Algorithm**:
+```
+const distance = Math.hypot(e.clientX - centerX, e.clientY - centerY)
+if (distance < 200px) { teleport field }
+```
+
+**Text Deletion Strategy**:
+- Uses setInterval to delete one character every 80ms
+- Stops when field is empty
+- Independent intervals for each field
+
+**Custom Alert Implementation**:
+- Shows/hides via `display: flex/none`
+- Uses smooth `slideIn` animation
+- Responsive padding and sizing
+- Works on all screen sizes
+
+### Browser Requirements
+- Modern ES6+ JavaScript support
+- CSS Grid and Flexbox
+- CSS Animations and Transitions
+- CSS Variables
+- Backdrop filters for blur effect
+- Hyperbolic distance calculation support
+
+### Customization Points
+
+To modify the project:
+- **Colors**: Update CSS variable values in `:root`
+- **Animation Speed**: Adjust duration values in CSS `@keyframes` and JS timings
+- **Cursor Distance**: Change the 200px threshold in `handleMouseMove()`
+- **Text Deletion Speed**: Adjust the 80ms interval in `startDeleting()`
+- **Fake Messages**: Edit the `messages` array in `runLoginSequence()`
+- **Final Message**: Modify the HTML in `revealPunchline()`
+
+### Performance Considerations
+- Uses requestAnimationFrame implicitly through CSS animations
+- Efficient DOM querying (cached references)
+- Event delegation where possible
+- Minimal reflow/repaint through CSS transforms
+- No external dependencies
+
+### Accessibility Notes
+This project deliberately violates accessibility principles for comedic effect. It should NOT be used as a reference for real production applications. The intentional friction demonstrates the importance of:
+- Predictable input behavior
+- Clear disabled states
+- Consistent field interactions
+- Non-deceptive UI styling
+- Proper error messaging
+
+### Development History
+Created for DEV 2026 April Fools Challenge, combining:
+- JavaScript DOM manipulation
+- Advanced CSS animations
+- Responsive web design
+- Humor through UX violations
+
+### Future Enhancement Ideas
+- localStorage to remember "attempts" across sessions
+- Multiple difficulty levels (harder cursor detection, faster deletion)
+- Accessibility audit section showing all the things it breaks
+- Sound effects for field teleportation
+- Mobile-specific variations
+- Accessibility statement showing all best practices violated
+
+### License & Attribution
+MIT Licensed - Created by Syed Ahmer Shah
+This project intentionally demonstrates anti-UX principles for entertainment purposes.
